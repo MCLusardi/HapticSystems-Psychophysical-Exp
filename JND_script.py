@@ -8,14 +8,14 @@ import copy #from the std python libs
 """ GLOBAL VARIABLES: need to determine day of experiment"""
 stairSettings={
     'nReversals':10, 
-    'nUp':1, 'nDown':1, 
+    'nUp':1, 'nDown':2, 
     'stepType':'lin', 
-    'minVal':0.5, 'maxVal':4.5, 
-    'stepSizes':[0.5]
+    'minVal':0, 'maxVal':2.5, 
+    'stepSizes':[1.5, 1.0, 1.0, 0.5]
 }
 
 conditions=[
-    {'label':'high', 'startVal':3, **stairSettings},
+    {'label':'high', 'startVal':2, **stairSettings},
     {'label':'low', 'startVal':0.5, **stairSettings},
 ]
 
