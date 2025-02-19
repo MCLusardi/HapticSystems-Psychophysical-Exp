@@ -6,6 +6,7 @@
 from psychopy import data, gui, core
 from psychopy.tools.filetools import fromFile
 import pylab
+import numpy
 
 #Open a dialog box to select files from
 files = gui.fileOpenDlg('.')
@@ -13,7 +14,7 @@ if not files:
     core.quit()
 
 #get the data from all the files
-allIntensities, allResponses = [],[]
+allIntensities, allResponses, allReversals = [],[], []
 for thisFileName in files:
     thisDat = fromFile(thisFileName)
     # print(type(thisDat))
@@ -25,15 +26,25 @@ for thisFileName in files:
         # print(allIntensities)
         allResponses.append( stair.data )
         # print(allResponses)
+        allReversals.append( stair.reversalIntensities[-6:] )
+        print(allReversals)
+
+#Calculate mean and standard deviation of the thresholds based on the reversals
+approxThreshold = numpy.average(allReversals)
+print('approxThreshold', approxThreshold)
+stdThreshold = numpy.std(allReversals)
+print('stdThreshold', stdThreshold)
     
 #plot each staircase
 pylab.subplot(121)
+pylab.suptitle('Approximate threshold = %0.3f mm' %(approxThreshold))
+pylab.title('std = %0.3f' %(stdThreshold))
 colors = 'brgkcmbrgkcm'
 lines, names = [],[]
 for stairNo, thisStair in enumerate(allIntensities):
-    print(stairNo)
-    print('thisStair', thisStair)
-    #lines.extend(pylab.plot(thisStair))
+    # print(stairNo)
+    # print('thisStair', thisStair)
+    # lines.extend(pylab.plot(thisStair))
     #names = files[fileN]
     pylab.plot(thisStair, label=stairNo)
 #pylab.legend()
@@ -53,7 +64,7 @@ combinedInten, combinedResp, combinedN = \
 fit = data.FitLogistic(combinedInten, combinedResp)
 smoothInt = pylab.arange(min(combinedInten), max(combinedInten), 0.5)
 smoothResp = fit.eval(smoothInt)
-thresh = fit.inverse(0.8)
+thresh = fit.inverse(0.71)
 print(thresh)
 
 #plot curve
