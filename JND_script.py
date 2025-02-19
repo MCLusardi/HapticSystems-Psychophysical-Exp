@@ -42,7 +42,7 @@ fileName = (expInfo['pilotOrMainStudy']
     + "-" + expInfo['dateStr'])
 
 dataFile = open(fileName+'.csv', 'w')  
-dataFile.write('targetSide,staircase,WidthDiff,correct\n') 
+dataFile.write('targetSide,comparisonValue, staircase,WidthDiff,correct\n') 
 
 # create window and stimuli
 win = visual.Window([800,600],allowGUI=True,
@@ -102,7 +102,7 @@ for thisDiff, thisCondition in stairs:  # will continue the staircase until it t
 
     # add the data to the staircase so it can calculate the next level
     stairs.addResponse(thisResp)
-    dataFile.write('%i,%s,%.3f,%i\n' %(targetSide, thisCondition['label'], thisDiff, thisResp))
+    dataFile.write('%i,%.3f, %s,%.3f,%i\n' %(targetSide, comparisonValue, thisCondition['label'], thisDiff, thisResp))
     core.wait(1)
 
 # staircase has ended

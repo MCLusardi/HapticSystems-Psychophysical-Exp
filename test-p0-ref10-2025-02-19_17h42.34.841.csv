@@ -1,0 +1,4 @@
+targetSide,comparisonValue, staircase,WidthDiff,correct
+1,8.000, high,2.000,1
+1,10.500, low,0.500,-1
+1,12.000, low,2.000,-1
