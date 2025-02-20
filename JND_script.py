@@ -10,7 +10,7 @@ stairSettings={
     'nReversals':10, 
     'nUp':1, 'nDown':2, 
     'stepType':'lin', 
-    'minVal':0, 'maxVal':2.5, 
+    'minVal':0, 'maxVal':2, 
     'stepSizes':[1.5, 1.0, 1.0, 0.5]
 }
 
